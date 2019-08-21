@@ -40,44 +40,50 @@ if (liriCommand === "spotify-this-song") {
     });
 }
 else if (liriCommand === "concert-this") {
-    // stuff here
-    // Name of venue
-    // Venue location
-    // date of event
-
+    axios.get("https://rest.bandsintown.com/artists/" + liriQuery + "/events?app_id=codingbootcamp")
+    .then(function(response) {
+        for (var i = 0; i < response.data.length; i++) {
+            console.log("Venue Name: "+ response.data[i].venue.name);
+            console.log("Venue Location: " + response.data[i].venue.city + ", " + response.data[i].venue.country);
+            console.log("Date of the Event: " + moment(response.data[i].datetime).format("L"));
+        }
+    });
 }
 
 // "movie-this"
 else if (liriCommand === "movie-this") {
-    // stuff here
-    // movie title
-    // movie release year
-    // imdb rating
-    // rotten tomatoes rating
-    // country where movie was produced
-    // language of the movie
-    // plot of the movie
-    // actors in the movie
-
+    axios.get("http://www.omdbapi.com/?t=" + liriQuery + "&y=&plot=short&apikey=" + keys.movies.id)
+        .then(function (response) {
+            console.log("Title: " + response.data.Title);
+            console.log("Year Released: " + response.data.Year);
+            console.log("IMDB rating: " + response.data.imdbRating);
+            console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+            console.log("Country/Countries Produced: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Cast: " + response.data.Actors);
+        });
 }
 
 // "do-what-it-says"
 else if (liriCommand === "do-what-it-says") {
-    fs.readFile("random.txt", "utf8", function(err, data) {
+    fs.readFile("random.txt", "utf8", function (err, data) {
 
         if (err) {
             logThis(err);
         }
 
+        // comma is the fence between neighbors...
         var readArray = data.split(",");
 
+        // make second part the liriQuery
         liriQuery = readArray[1];
 
         spotify.search({ type: "track", query: liriQuery }, function (err, data) {
             if (err) {
                 console.log(err);
             }
-    
+
             var queriedSong = data.tracks.items;
             console.log("Artist: " + queriedSong[0].artists[0].name);
             console.log("Song Name: " + queriedSong[0].name);
