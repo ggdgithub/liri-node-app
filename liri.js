@@ -4,8 +4,17 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
+// Variables to hold LIRI commands and queries after "node liri.js":
+
+// for the LIRI command (eg. concert-this, spotify-this-song, etc.)
+var liriType = process.argv[2];
+
+// for the search term (eg. Yesterday, Vampire Weekend, Avengers: Endgame, etc.)
+var liriQuery = process.argv[3];
+
 // "spotify-this-song"
-spotify
+if (process.argv[2] === "spotify-this-song") {
+    spotify
     .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
     .then(function (data) {
         console.log(data);
@@ -13,6 +22,7 @@ spotify
     .catch(function (err) {
         console.error('Error occurred: ' + err);
     });
+}
 
 // var artist = something;
 // the commands
