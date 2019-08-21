@@ -1,5 +1,6 @@
 // requires
 require("dotenv").config();
+var fs = require("fs");
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
@@ -7,7 +8,7 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
 // Variables to hold LIRI commands and queries after "node liri.js":
-
+// -----------------------------------------------------------------
 // for the LIRI command (eg. concert-this, spotify-this-song, etc.)
 var liriCommand = process.argv[2];
 
@@ -44,8 +45,9 @@ else if (liriCommand === "concert-this") {
     // Venue location
     // date of event
 
-    // "movie-this"
 }
+
+// "movie-this"
 else if (liriCommand === "movie-this") {
     // stuff here
     // movie title
@@ -57,14 +59,35 @@ else if (liriCommand === "movie-this") {
     // plot of the movie
     // actors in the movie
 
-    // "do-what-it-says"
 }
-else if (liriCommand === "do-what-it-says") {
-    // stuff here
-    // use random.txt
 
-    // else end here
+// "do-what-it-says"
+else if (liriCommand === "do-what-it-says") {
+    fs.readFile("random.txt", "utf8", function(err, data) {
+
+        if (err) {
+            logThis(err);
+        }
+
+        var readArray = data.split(",");
+
+        liriQuery = readArray[1];
+
+        spotify.search({ type: "track", query: liriQuery }, function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+    
+            var queriedSong = data.tracks.items;
+            console.log("Artist: " + queriedSong[0].artists[0].name);
+            console.log("Song Name: " + queriedSong[0].name);
+            console.log("Preview Link: " + queriedSong[0].preview_url);
+            console.log("Album: " + queriedSong[0].album.name);
+        });
+    });
 }
+
+// "enter valid input please"
 else {
     console.log("Please enter a valid command and search term (eg. node liri.js movie-this Godzilla)");
-}
+};
