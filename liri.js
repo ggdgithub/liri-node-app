@@ -52,7 +52,7 @@ else if (liriCommand === "concert-this") {
 
 // "movie-this"
 else if (liriCommand === "movie-this") {
-    axios.get("http://www.omdbapi.com/?t=" + liriQuery + "&y=&plot=short&apikey=trilogy")
+    axios.get("http://www.omdbapi.com/?t=" + liriQuery + "&y=&plot=short&apikey=" + keys.omdb.id)
         .then(function (response) {
             console.log("Title: " + response.data.Title);
             console.log("Year Released: " + response.data.Year);
