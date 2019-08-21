@@ -40,7 +40,7 @@ if (liriCommand === "spotify-this-song") {
     });
 }
 else if (liriCommand === "concert-this") {
-    axios.get("https://rest.bandsintown.com/artists/" + liriQuery + "/events?app_id=codingbootcamp")
+    axios.get("https://rest.bandsintown.com/artists/" + liriQuery + "/events?app_id=" + keys.bandsInTown.id)
     .then(function(response) {
         for (var i = 0; i < response.data.length; i++) {
             console.log("Venue Name: "+ response.data[i].venue.name);
