@@ -22,52 +22,36 @@ if (process.argv[2] === "spotify-this-song") {
     .catch(function (err) {
         console.error('Error occurred: ' + err);
     });
+    // artist(s)
+    // song name
+    // preview link
+    // song album
+    
+// "concert-this"
+} else if (process.argv[2] === "concert-this") {
+    // stuff here
+    // Name of venue
+    // Venue location
+    // date of event
+    
+// "movie-this"
+} else if (process.argv[2] === "movie-this") {
+    // stuff here
+    // movie title
+    // movie release year
+    // imdb rating
+    // rotten tomates rating
+    // country where movie was produced
+    // language of the movie
+    // plot of the movie
+    // actors in the movie
+    
+// "do-what-it-says"
+} else if (process.argv[2] === "do-what-it-says") {
+    // stuff here
+    // use random.txt
+
+// else end here
+} else {
+    // stuff here
 }
-
-// var artist = something;
-// the commands
-    // maybe this goes here?
-    // axios({
-    //     url: 'https://accounts.spotify.com/api/token',
-    //     method: 'post',
-    //     params: {
-    //       grant_type: 'client_credentials'
-    //     },
-    //     headers: {
-    //       'Accept':'application/json',
-    //       'Content-Type': 'application/x-www-form-urlencoded'
-    //     },
-    //     auth: {
-    //       username: 'YOUR-CLIENT-ID',
-    //       password: 'YOUR-CLIENT-SECRET'
-    //     }
-    //   }).then(function(response) {
-    //       console.log(response);
-    //   }).catch(function(error) {
-    //   });
-    // node liri.js concert-this <artist/band name here>
-        // somehow use this: "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
-    // node liri.js spotify-this-song '<song name here>'
-    // node liri.js movie-this '<movie name here>'
-    // node liri.js do-what-it-says
-
-// GOAL OF APP:
-    // accept input
-        // song
-        // film
-        // artist/concert
-    // push results using axios
-        // info about song
-            // artist(s)
-            // song name
-            // preview link
-            // song album
-        // info about movie
-            // movie title
-            // movie release year
-            // imdb rating
-            // rotten tomates rating
-            // country where movie was produced
-            // language of the movie
-            // plot of the movie
-            // actors in the movie
